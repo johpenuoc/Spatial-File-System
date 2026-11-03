@@ -56,12 +56,17 @@ class Renderer:
 
         focuspos = pos
         for id, p in enumerate(points):
-            perspx = focuspos[0] - p[0] + centre[0]
-            perspy = focuspos[1] - p[1] + centre[1]
-            perspz = focuspos[2] - p[2] + centre[2]
+            perspx = p[0]
+            perspy = p[1]
+            perspz = p[2]
 
-            x, z = self.yrotate(perspx, perspz, focusrot)
-            y, z = self.xrotate(perspy, z, focusrot2)
+            #x, z = self.yrotate(perspx, perspz, focusrot2)
+            y, z = self.xrotate(perspy, perspz, focusrot)
+            x, y = self.zrotate(perspx, y, 0)
+
+            x += centre[0]
+            y += centre[1]
+            z += centre[2]
 
             buf = [0, 0, (x, y, z)]
 
@@ -186,7 +191,7 @@ class ItemWheel(Renderer):
             z = rad * cos(radians(theta))
             y = rad * sin(radians(theta))
 
-            points.append([self.centre[0], self.centre[1] + y, self.centre[2] - z, theta, items[i]])
+            points.append([-100, y, z, theta, items[i]])
 
             theta += t_step
 

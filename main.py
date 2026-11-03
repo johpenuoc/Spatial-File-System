@@ -24,7 +24,7 @@ class Main:
     def update_renders(self):
         tree = self.fs.tree
 
-        centre = [0, 0, 10]
+        centre = [0, 0, -25]
         dim = (5, 5, 5)
         x, y, z = 0, 0, 0
         xstep = 100
@@ -81,14 +81,14 @@ class Main:
 
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    pygame.QUIT()
+                    pygame.quit()
                     sys.exit()
 
             self.get_focused()
 
             self.win.fill((0, 0, 0))
 
-            self.focus.rot += 10 * self.dt
+            self.focus.rot += 50 * self.dt
 
             self.render_tree_items()
 
